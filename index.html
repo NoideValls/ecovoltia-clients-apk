@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ecovoltia · App de clientes</title>
+<style>
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#F6F8F4;color:#17201A}
+  header{background:linear-gradient(135deg,#8CCF35,#4D8012);color:#fff;padding:32px 24px 40px;border-radius:0 0 32px 32px}
+  header img{height:36px}
+  h1{font-size:28px;margin:28px 0 8px;line-height:1.2}
+  header p{margin:0;opacity:.9}
+  main{max-width:480px;margin:0 auto;padding:24px}
+  .boto{display:block;text-align:center;background:#4D8012;color:#fff;text-decoration:none;font-weight:600;font-size:17px;padding:16px;border-radius:16px}
+  .versio{text-align:center;color:#68716B;font-size:14px;margin:10px 0 28px}
+  ol{padding-left:20px;line-height:1.6}
+  .qr{display:none;text-align:center;margin-top:28px}
+  .qr img{width:240px}
+  @media (min-width:700px){.qr{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <main style="padding:0">
+    <img src="logo.png" alt="Ecovoltia">
+    <h1>App de clientes</h1>
+    <p>Versión de pruebas para Android. Se actualiza sola.</p>
+  </main>
+</header>
+<main>
+  <a class="boto" href="https://github.com/NoideValls/ecovoltia-clients-apk/releases/latest/download/Ecovoltia.apk">Descargar para Android</a>
+  <div class="versio" id="versio">&nbsp;</div>
+  <ol>
+    <li>Pulsa <b>Descargar</b> y abre el archivo <b>Ecovoltia.apk</b>.</li>
+    <li>Si Android lo pide, permite instalar apps desde el navegador.</li>
+    <li>Pulsa <b>Instalar</b>. Las próximas versiones llegarán solas.</li>
+  </ol>
+  <div class="qr"><p>Desde el ordenador, escanéalo con el móvil:</p><img src="qr.png" alt="QR"></div>
+</main>
+<script>
+fetch("https://api.github.com/repos/NoideValls/ecovoltia-clients-apk/releases/latest")
+  .then(r => r.json()).then(r => {
+    const a = (r.assets || []).find(x => x.name === "Ecovoltia.apk");
+    document.getElementById("versio").textContent =
+      (r.name || "") + (a ? " · " + (a.size / 1048576).toFixed(0) + " MB" : "");
+  }).catch(() => {});
+</script>
+</body>
+</html>
